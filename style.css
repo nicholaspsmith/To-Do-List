@@ -1,0 +1,49 @@
+html{
+	background: #e8e8e8;
+}
+body{
+	margin: 0;
+}
+#main-div {
+	background: #eee;
+	width: 400px;
+	margin: 0 auto;
+	border-style: solid;
+	border-width: 1px;
+	padding: 12px;
+	border-radius: 0 0 5px 5px;
+	border-top: 0;
+	box-shadow: 2px 3px 12px #888888;
+}
+.list{
+	margin: 10px;
+	margin-left: 0;
+	margin-right: 0;
+	border-width: 1px;
+	border-bottom-style: solid 
+}
+#text1{
+	width: 300px;
+	color: green;
+	float: left;
+	height: 30px;
+	font-size: 20px
+}
+
+#inputs {
+	border-width: 2px;
+	border-bottom-style: solid;
+	width: 300px;
+	margin: 0 auto;
+}
+hr{
+	margin-bottom: 20px;
+}
+#add{
+	visibility: hidden;
+}
+#to-do-list{
+	width: 300px;
+	padding 0;
+	margin: 0 auto;
+}
