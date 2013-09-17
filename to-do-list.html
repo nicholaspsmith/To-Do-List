@@ -1,0 +1,120 @@
+<html>
+<head>
+  <title>To Do List</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+
+<div id="main-div">
+  <div id="inputs">
+    <h1>To Do List</h1>
+    <hr>
+  <form>
+    <input type="text" id="text1" placeholder="What to do..."/>
+    <input type="submit" id="add" value="Add" />
+  </form>
+  </div>
+
+  <div id="to-do-list"></div>
+
+
+  <div id="templates">
+    <script class="list" type="text/template">
+        <div class="list">
+          <% if (complete == true) {       %>
+            <b style="text-decoration:line-through"><%=name%></b>
+          <% } else {                      %>
+          <input type="checkbox" class="completed-checkbox" data-title="<%=name%>" data-id="<%=id%>">
+          <b><%=name%></b>
+          <% } %>
+          </label>
+        </div>
+      </script>
+  </div>
+</div>
+
+<div id="template2">
+  <div id="template2">
+        <script class="items-left" type="text/template">
+          <div class='items-left'>
+            <label><%=num%> items left</label>
+          </div>
+        </script>
+      </script>
+  </div>
+</div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+<script type="text/javascript">
+
+var addFunctions = function (){
+
+
+  $('.completed-checkbox').click(function() {
+    console.log('checked');
+    for (var i = 0; i < myList.list.length; i++){
+      if ($(this).data('id') === myList.list[i].id){
+        myList.list[i].complete = true;
+        myList.updateList(tasks);
+      }
+    };
+  });
+}
+
+
+//make a string with which to create template
+var templateHtml = $('#templates .list').html();
+// Make a template with that string
+var template = _.template(templateHtml);
+
+var template2Html = $('#templates .items-left').html();
+
+
+
+var tasks = [];
+
+
+var ToDoList = function (array) {
+  this.list = array;
+  this.updateList(this.list);
+}
+ToDoList.prototype.updateList = function () {
+  $('#to-do-list').html('');
+  for (var i = 0; i < this.list.length; i++){
+    var templ = template(this.list[i]);
+    $('#to-do-list').append(templ);
+  }
+  addFunctions();
+};
+var myList = new ToDoList(tasks);
+
+
+$(document).ready(function(){
+
+  $('#add').on('click', function (e) {
+    e.preventDefault();
+    var name = $('#text1').val();
+    var complete = false;
+    var id = myList.list.length
+    newTask = {
+      name: name,
+      complete: complete,
+      id: id
+    }
+    tasks.push(newTask);
+    myList.updateList(tasks);
+    $('#text1').val('');
+  });
+
+    addFunctions();
+});
+
+
+
+</script>
+
+</body>
+</html>
