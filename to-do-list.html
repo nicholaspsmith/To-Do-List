@@ -14,18 +14,20 @@
     <input type="text" id="text1" placeholder="What to do..."/>
     <input type="submit" id="add" value="Add" />
   </form>
+  <button id="complete-all" class="complete">Complete all</button>
   </div>
 
   <div id="to-do-list"></div>
+  <div id="items-left"><span id="number-items-left">0</span> items left</div>
 
 
   <div id="templates">
     <script class="list" type="text/template">
-        <div class="list">
+        <div class="list-item" data-id="<%=id%>">
           <% if (complete == true) {       %>
-            <b style="text-decoration:line-through"><%=name%></b>
+            <span class='strike-outer'><span class='strike-inner'><b><%=name%></b></span></span>
           <% } else {                      %>
-          <input type="checkbox" class="completed-checkbox" data-title="<%=name%>" data-id="<%=id%>">
+          <input type="checkbox" class="checkbox" data-title="<%=name%>" data-id="<%=id%>">
           <b><%=name%></b>
           <% } %>
           </label>
@@ -50,20 +52,6 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
 <script type="text/javascript">
 
-var addFunctions = function (){
-
-
-  $('.completed-checkbox').click(function() {
-    console.log('checked');
-    for (var i = 0; i < myList.list.length; i++){
-      if ($(this).data('id') === myList.list[i].id){
-        myList.list[i].complete = true;
-        myList.updateList(tasks);
-      }
-    };
-  });
-}
-
 
 //make a string with which to create template
 var templateHtml = $('#templates .list').html();
@@ -72,9 +60,12 @@ var template = _.template(templateHtml);
 
 var template2Html = $('#templates .items-left').html();
 
-
-
-var tasks = [];
+var tasks = [{
+    name: 'finish todo list',
+    complete: false,
+    id: 0
+  }
+];
 
 
 var ToDoList = function (array) {
@@ -87,18 +78,31 @@ ToDoList.prototype.updateList = function () {
     var templ = template(this.list[i]);
     $('#to-do-list').append(templ);
   }
-  addFunctions();
 };
+ToDoList.prototype.completeAll = function(){
+  for (var i = 0; i < myList.list.length; i++){
+    myList.list[i].complete = true;
+  }
+  myList.updateList();
+};
+ToDoList.prototype.updateCount = function () {
+  var x = 0;
+  for (var i = 0; i < myList.list.length; i++){
+    if (myList.list[i].complete === false){
+      x++;
+    }
+  }
+  $('#number-items-left').text(x);
+}
 var myList = new ToDoList(tasks);
+// Click handlers
 
-
-$(document).ready(function(){
-
-  $('#add').on('click', function (e) {
-    e.preventDefault();
-    var name = $('#text1').val();
-    var complete = false;
-    var id = myList.list.length
+$(document).on('click', '#add',function (e) {
+  e.preventDefault();
+  var name = $('#text1').val();
+  var complete = false;
+  var id = myList.list.length
+  if (name.length > 0){
     newTask = {
       name: name,
       complete: complete,
@@ -106,13 +110,54 @@ $(document).ready(function(){
     }
     tasks.push(newTask);
     myList.updateList(tasks);
+    console.log('entering updateCount');
+    myList.updateCount();
     $('#text1').val('');
-  });
+  } else {
+    //Do nothing
+  }
+  
+});
 
-    addFunctions();
+$(document).on('change', '.checkbox', function() {
+  for (var i = 0; i < myList.list.length; i++){
+    if ($(this).data('id') === myList.list[i].id){
+      myList.list[i].complete = true;
+      myList.updateList(tasks);
+    }
+  };
+  myList.updateCount();
+});
+
+// $(document).on('click', '.list-item', function() {
+//   for (var i = 0; i < myList.list.length; i++){
+//     console.log($(this).data('id'))
+//     if ($(this).data('id') === myList.list[i].id){
+//       myList.list[i].complete = true;
+//       myList.updateList(tasks);
+//     }
+//   };
+//   myList.updateCount();
+// });
+
+
+$(document).on('click', '.complete', function(){
+  myList.completeAll();
+});
+
+$(document).on('dblclick', '.list-item', function() {
+  var listItemHtml = $(this).text();
+
+  var editTextHtml = '<input type="text" value="' + trim(listItemHtml) + '">';
+  $(this).html(editTextHtml);
+
+  
 });
 
 
+function trim (str) {
+    return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+}
 
 </script>
 

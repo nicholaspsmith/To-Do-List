@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Permanent+Marker|Homemade+Apple|Cedarville+Cursive);
+@import url(http://fonts.googleapis.com/css?family=Permanent+Marker|Homemade+Apple|Cedarville+Cursive|Nothing+You+Could+Do);
 
 html{
 	background: #e8e8e8;
@@ -6,15 +6,15 @@ html{
 body{
 	margin: 0;
 }
-hr{
-	margin-bottom: 20px;
-}
 h1{
 	font-family: 'Permanent Marker', cursive;
 }
+form {
+	margin: 0;
+}
 #main-div {
 	background: #eee;
-	width: 400px;
+	width: 350px;
 	margin: 0 auto;
 	border-style: solid;
 	border-width: 1px;
@@ -23,21 +23,32 @@ h1{
 	border-top: 0;
 	box-shadow: 2px 3px 12px #888888;
 }
-.list{
+.list-item{
 	margin: 10px;
 	margin-left: 0;
 	margin-right: 0;
 	border-width: 1px;
 	border-bottom-style: solid;
-	font-family: 'Homemade Apple', cursive;
+	font-family: 'Nothing You Could Do', cursive;
+	font-size: 20px;
+}
+.list-item:hover{
+	cursor: pointer;
+}
+.strike-inner{
+	color: black;
+	font-size: 20px;
+}
+.strike-outer{
+	color: red;
+	text-decoration: line-through;
 }
 #text1{
 	width: 300px;
-	color: green;
 	float: left;
-	height: 35px;
+	height: 38px;
 	font-size: 20px;
-	font-family: 'Cedarville Cursive', cursive;
+	font-family: 'Nothing You Could Do', cursive;
 }
 
 #inputs {
@@ -48,9 +59,38 @@ h1{
 }
 #add{
 	visibility: hidden;
+	height: 0px;
+	margin: 0;
+	padding: 0;
 }
 #to-do-list{
 	width: 300px;
 	padding 0;
 	margin: 0 auto;
 }
+#items-left{
+	position: relative;
+	bottom: -6px;
+	left: 25px;
+	font-family: 'Nothing You Could Do', cursive;
+}
+#complete-all{
+	font-family: 'Nothing You Could Do', cursive;
+	border: 0;
+	background: #eee;
+	width: 300px;
+	text-align: left;
+	border: 1px dotted grey;
+}
+#complete-all:hover{
+	width: 300px;
+	text-align: left;
+	cursor: pointer;
+}
+/*.checkbox{
+	visibility: hidden;
+	margin: 0;
+	padding: 0;
+	width: 0;
+	height: 0;
+}*/
