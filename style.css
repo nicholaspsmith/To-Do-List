@@ -1,5 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Permanent+Marker|Homemade+Apple|Cedarville+Cursive|Nothing+You+Could+Do);
-
+/* Document-wide styles */
 html{
 	background: #e8e8e8;
 }
@@ -12,9 +12,42 @@ h1{
 form {
 	margin: 0;
 }
+
+/* ID styles */
+#add{
+	visibility: hidden;
+	height: 0px;
+	margin: 0;
+	padding: 0;
+}
+#complete-all{
+	font-family: 'Nothing You Could Do', cursive;
+	border: 0;
+	background: #eee;
+	width: 360px;
+	text-align: left;
+	border: 1px dotted grey;
+}
+#complete-all:hover{
+	width: 360px;
+	text-align: left;
+	cursor: pointer;
+}
+#inputs {
+	border-width: 2px;
+	border-bottom-style: solid;
+	width: 360px;
+	margin: 0 auto;
+}
+#items-left{
+	position: relative;
+	bottom: -6px;
+	left: 25px;
+	font-family: 'Nothing You Could Do', cursive;
+}
 #main-div {
 	background: #eee;
-	width: 350px;
+	width: 415px;
 	margin: 0 auto;
 	border-style: solid;
 	border-width: 1px;
@@ -23,14 +56,41 @@ form {
 	border-top: 0;
 	box-shadow: 2px 3px 12px #888888;
 }
+#move-up{
+	margin-left: 40px;
+}
+#text1{
+	width: 360px;
+	float: left;
+	height: 38px;
+	font-size: 20px;
+	font-family: 'Nothing You Could Do', cursive;
+}
+#to-do-list{
+	width: 400px;
+	padding 0;
+	margin: 0 auto;
+}
+
+
+/* CLASS styles */
 .list-item{
+	width: 380px;
 	margin: 10px;
 	margin-left: 0;
 	margin-right: 0;
 	border-width: 1px;
 	border-bottom-style: solid;
 	font-family: 'Nothing You Could Do', cursive;
-	font-size: 20px;
+	font-size: 18px;
+}
+.list-item-buttons{
+	width: 150px;
+	margin-left: 200px;
+}
+.list-item-text{
+	max-width: 215px;
+	overflow: hidden;
 }
 .list-item:hover{
 	cursor: pointer;
@@ -43,54 +103,10 @@ form {
 	color: red;
 	text-decoration: line-through;
 }
-#text1{
-	width: 300px;
+.user-input{
+	height: 31px;
+	width: 175px;
 	float: left;
-	height: 38px;
 	font-size: 20px;
 	font-family: 'Nothing You Could Do', cursive;
 }
-
-#inputs {
-	border-width: 2px;
-	border-bottom-style: solid;
-	width: 300px;
-	margin: 0 auto;
-}
-#add{
-	visibility: hidden;
-	height: 0px;
-	margin: 0;
-	padding: 0;
-}
-#to-do-list{
-	width: 300px;
-	padding 0;
-	margin: 0 auto;
-}
-#items-left{
-	position: relative;
-	bottom: -6px;
-	left: 25px;
-	font-family: 'Nothing You Could Do', cursive;
-}
-#complete-all{
-	font-family: 'Nothing You Could Do', cursive;
-	border: 0;
-	background: #eee;
-	width: 300px;
-	text-align: left;
-	border: 1px dotted grey;
-}
-#complete-all:hover{
-	width: 300px;
-	text-align: left;
-	cursor: pointer;
-}
-/*.checkbox{
-	visibility: hidden;
-	margin: 0;
-	padding: 0;
-	width: 0;
-	height: 0;
-}*/
